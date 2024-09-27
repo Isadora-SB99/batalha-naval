@@ -16,11 +16,7 @@ public class Main {
         jogador.setNome(new Scanner(System.in).next());
     }
 
-
-    public static void main(String[] args) {
-        Scanner read = new Scanner(System.in);
-        char modoJogo = '.';
-
+    public static void definirModoJogo(char modoJogo, Scanner read){
         while (modoJogo != 'P' && modoJogo != 'C') {
             System.out.print("Deseja jogar contra outra pessoa ou contra o computador (P - pessoa / C - computador): ");
             modoJogo = read.next().toUpperCase().charAt(0);
@@ -38,6 +34,14 @@ public class Main {
                     System.out.println("Opção inválida");
             }
         }
+    }
+
+
+    public static void main(String[] args) {
+        Scanner read = new Scanner(System.in);
+        char modoJogo = '.';
+
+        definirModoJogo(modoJogo, read);
 
 
         System.out.println("tabuleiro "+jogador1.getNome());
