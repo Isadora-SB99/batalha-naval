@@ -5,6 +5,9 @@ public class Jogador {
     public char[][] tabuleiro;
     public int pontuacao;
 
+    public Jogador() {
+    }
+
     public Jogador(char[][] tabuleiro, int pontuacao) {
         this.tabuleiro = tabuleiro;
         this.pontuacao = pontuacao;
