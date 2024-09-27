@@ -1,5 +1,9 @@
 package coisas;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Tabuleiro {
 
     public static char[] coordenadaLetras = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
@@ -31,25 +35,33 @@ public class Tabuleiro {
         }
     }
 
+
+    /*
+     * Um navio ocupando 4 espaços
+     * Dois navios ocupando 3 espaços
+     * Três navios ocupando 2 espaços
+     * Quatro navios ocupando 1 espaço
+     * */
+
     public static void preencherTabuleiroManual(char[][] tabuleiro) {
+        //não sei se vai ser uma lista de navio, mas igual, pra cada navio que tiver, tem que perguntar onde colocar
+
+        List<Integer> navios = new ArrayList<>();
         //aqui precisa ter os navios definidos pra colocar
-        for (int i=0; i< tabuleiro.length;i++){
-            for (int j=0; j<tabuleiro[i].length;j++){
-                //aqui pergunta "onde colocar o navio..." e recebe as coordenadas
-//                System.out.print(" "+ tabuleiro[i][j]);
-            }
-            System.out.println();
+        //criar um objeto Navio com o tamanho?
+
+        for (Object navio : navios) {
+            //aqui pergunta "onde colocar o navio..." e recebe as coordenadas
+
         }
     }
 
     public static void preencherTabuleiroAutomatico(char[][] tabuleiro) {
+        Random random = new Random();
+        List<Integer> navios = new ArrayList<>();
         //aqui precisa ter os navios definidos pra colocar
-        for (int i=0; i< tabuleiro.length;i++){
-            for (int j=0; j<tabuleiro[i].length;j++){
-                //aqui pergunta "onde colocar o navio..." e recebe as coordenadas
-//                System.out.print(" "+ tabuleiro[i][j]);
-            }
-            System.out.println();
+        for (Object navio : navios) {
+            //
         }
     }
 }
