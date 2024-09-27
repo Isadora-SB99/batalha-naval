@@ -2,8 +2,7 @@ import coisas.Jogador;
 
 import java.util.Scanner;
 
-import static coisas.Tabuleiro.imprimirTabuleiro;
-import static coisas.Tabuleiro.inicializarTabuleiro;
+import static coisas.Tabuleiro.*;
 
 public class Main {
 
@@ -11,12 +10,16 @@ public class Main {
     static Jogador jogador1 = new Jogador(new char[TAM][TAM], 0);
     static Jogador jogador2 = new Jogador(new char[TAM][TAM], 0);
 
+    public static void regrasDoJogo(){
+        //imprimir regras/instruções pro jogador
+    }
+
     public static void lerNomeJogador(Jogador jogador, int num){
         System.out.print("Jogador "+num+", digite seu nome: ");
         jogador.setNome(new Scanner(System.in).next());
     }
 
-    public static void definirModoJogo(char modoJogo, Scanner read){
+    public static char definirModoJogo(char modoJogo, Scanner read){
         while (modoJogo != 'P' && modoJogo != 'C') {
             System.out.print("Deseja jogar contra outra pessoa ou contra o computador (P - pessoa / C - computador): ");
             modoJogo = read.next().toUpperCase().charAt(0);
@@ -34,6 +37,12 @@ public class Main {
                     System.out.println("Opção inválida");
             }
         }
+        return modoJogo;
+    }
+
+    public static void inicializarTabuleiros(){
+        inicializarTabuleiro(jogador1.tabuleiro);
+        inicializarTabuleiro(jogador2.tabuleiro);
     }
 
 
@@ -41,15 +50,23 @@ public class Main {
         Scanner read = new Scanner(System.in);
         char modoJogo = '.';
 
-        definirModoJogo(modoJogo, read);
+        regrasDoJogo();
+
+        modoJogo = definirModoJogo(modoJogo, read);
+        inicializarTabuleiros();
+
+        if (modoJogo == 'C'){
+            preencherTabuleiroAutomatico(jogador2.tabuleiro);
+            //aqui pergunta se jogador 1 quer preencher automatico ou manual
+        }else{
+            //pergunta pros dois jogadores se querem preencher automatico ou manual
+        }
 
 
         System.out.println("tabuleiro "+jogador1.getNome());
-        inicializarTabuleiro(jogador1.tabuleiro);
         imprimirTabuleiro(jogador1.tabuleiro);
 
         System.out.println("tabuleiro "+jogador2.getNome());
-        inicializarTabuleiro(jogador2.tabuleiro);
         imprimirTabuleiro(jogador2.tabuleiro);
     }
 }
