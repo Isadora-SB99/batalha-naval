@@ -2,6 +2,8 @@ package coisas;
 
 public class Tabuleiro {
 
+    public static char[] coordenadaLetras = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+
     public static void inicializarTabuleiro(char[][] tabuleiro){
         for (int i=0; i< tabuleiro.length;i++){
             for (int j=0; j<tabuleiro[i].length;j++){
@@ -10,10 +12,20 @@ public class Tabuleiro {
         }
     }
 
-    public static void imprimirTabuleiro(char[][] tabuleiro){
-        for (int i=0; i< tabuleiro.length;i++){
-            for (int j=0; j<tabuleiro[i].length;j++){
-                System.out.print(" "+ tabuleiro[i][j]+" ");
+    public static void imprimeCoordenadaLetras() {
+        System.out.print("  ");
+        for (char letra : coordenadaLetras) {
+            System.out.print(" " + letra + " ");
+        }
+        System.out.println();
+    }
+
+    public static void imprimirTabuleiro(char[][] tabuleiro) {
+        imprimeCoordenadaLetras();
+        for (int l = 0; l < tabuleiro.length; l++) {
+            System.out.print((l) + " ");
+            for (int c = 0; c < tabuleiro[l].length; c++) {
+                System.out.print(" " + tabuleiro[l][c] + " ");
             }
             System.out.println();
         }
