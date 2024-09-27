@@ -4,10 +4,10 @@ public class Tabuleiro {
 
     public static char[] coordenadaLetras = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
-    public static void inicializarTabuleiro(char[][] tabuleiro){
-        for (int i=0; i< tabuleiro.length;i++){
-            for (int j=0; j<tabuleiro[i].length;j++){
-                tabuleiro[i][j] = '.';
+    public static void inicializarTabuleiro(char[][] tabuleiro) {
+        for (int l = 0; l < tabuleiro.length; l++) {
+            for (int c = 0; c < tabuleiro[l].length; c++) {
+                tabuleiro[l][c] = '.';
             }
         }
     }
