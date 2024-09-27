@@ -7,8 +7,9 @@ import static coisas.Tabuleiro.inicializarTabuleiro;
 
 public class Main {
 
-    static Jogador jogador1 = new Jogador(new char[10][10], 0);
-    static Jogador jogador2 = new Jogador(new char[10][10], 0);
+    public static final int TAM = 10;
+    static Jogador jogador1 = new Jogador(new char[TAM][TAM], 0);
+    static Jogador jogador2 = new Jogador(new char[TAM][TAM], 0);
 
     public static void lerNomeJogador(Jogador jogador, int num){
         System.out.print("Jogador "+num+", digite seu nome: ");
