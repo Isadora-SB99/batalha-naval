@@ -11,7 +11,17 @@ public class Main {
     static Jogador jogador2 = new Jogador(new char[TAM][TAM], 0);
 
     public static void regrasDoJogo(){
-        //imprimir regras/instruções pro jogador
+        System.out.println("\n~~~Bem-vindos ao jogo de batalha naval!~~~".toUpperCase());
+        System.out.println("São dois jogadores (ou um jogador e o computador)");
+        System.out.println("Cada jogador terá:\n" +
+                "     * Um navio ocupando 4 espaços\n" +
+                "     * Dois navios ocupando 3 espaços\n" +
+                "     * Três navios ocupando 2 espaços\n" +
+                "     * Quatro navios ocupando 1 espaço");
+        System.out.println("Também é possível escolher se deseja inserir os barcos de forma manual ou de forma automática.");
+        System.out.println("Tiros na água imprimem '*', tiros em navios imprimem o número da quantidade de posições do navio.");
+        System.out.println("Vence quem afundar todos os navios do adversário primeiro.");
+        System.out.println("Bom jogo e boa sorte!\n\n");
     }
 
     public static void lerNomeJogador(Jogador jogador, int num){
