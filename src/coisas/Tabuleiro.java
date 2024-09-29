@@ -74,35 +74,38 @@ public class Tabuleiro {
         imprimirTabuleiro(tabuleiro);
 
         for (Integer navio : navios) {
-            char orientacao = '.';
-            int linha = -1;
-            char colunaChar = '0';
+            boolean posicionado = false;
+            while (!posicionado) {
 
-            while (orientacao != 'H' && orientacao != 'V') {
-                System.out.print("Em qual sentido deseja posicionar o navio de " + navio + " posições? (H - horizontal / V - vertical) ");
-                orientacao = read.next().toUpperCase().charAt(0);
-            }
+                char orientacao = '.';
+                int linha = -1;
+                char colunaChar = '0';
 
-            System.out.println("Informe a posição inicial do navio:");
-            if (orientacao == 'H') {
-                while (linha < 0 || linha > 9) {
-                    System.out.print("linha (0-9): ");
-                    linha = read.nextInt();
+                while (orientacao != 'H' && orientacao != 'V') {
+                    System.out.print("Em qual sentido deseja posicionar o navio de " + navio + " posições? (H - horizontal / V - vertical) ");
+                    orientacao = read.next().toUpperCase().charAt(0);
                 }
-                while (colunaChar < 65 || colunaChar > 75 - navio) {
-                    System.out.print("coluna (A-" + (char) (75 - navio) + "): ");
-                    colunaChar = read.next().toUpperCase().charAt(0);
+
+                System.out.println("Informe a posição inicial do navio:");
+                if (orientacao == 'H') {
+                    while (linha < 0 || linha > 9) {
+                        System.out.print("linha (0-9): ");
+                        linha = read.nextInt();
+                    }
+                    while (colunaChar < 65 || colunaChar > 75 - navio) {
+                        System.out.print("coluna (A-" + (char) (75 - navio) + "): ");
+                        colunaChar = read.next().toUpperCase().charAt(0);
+                    }
+                } else {
+                    while (linha < 0 || linha > 10 - navio) {
+                        System.out.print("linha (0-" + (10 - navio) + "): ");
+                        linha = read.nextInt();
+                    }
+                    while (colunaChar < 65 || colunaChar > 75) {
+                        System.out.print("coluna (A-J): ");
+                        colunaChar = read.next().toUpperCase().charAt(0);
+                    }
                 }
-            } else {
-                while (linha < 0 || linha > 10 - navio) {
-                    System.out.print("linha (0-" + (10 - navio) + "): ");
-                    linha = read.nextInt();
-                }
-                while (!(colunaChar > 65) || colunaChar > 75) {
-                    System.out.print("coluna (A-J): ");
-                    colunaChar = read.next().toUpperCase().charAt(0);
-                }
-            }
 
                 int coluna = converteColuna(colunaChar);
 
@@ -116,22 +119,25 @@ public class Tabuleiro {
         }
     }
 
-    public static void preencherTabuleiroAutomatico(char[][] tabuleiro) {
+    public static void preencherTabuleiroAutomatico(Jogador jogador) {
         Random random = new Random();
 
         int[] navios = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
 
         for (Integer navio : navios) {
-            char orientacao = random.nextBoolean() ? 'H' : 'V';
-            int linha = random.nextInt(0, orientacao == 'H' ? 10 : 10 - navio);
-            int coluna = random.nextInt(0, orientacao == 'H' ? 10 - navio : 10);
+            boolean posicionado = false;
+
+            while (!posicionado) {
+                char orientacao = random.nextBoolean() ? 'H' : 'V';
+                int linha = random.nextInt(0, orientacao == 'H' ? 10 : 10 - navio);
+                int coluna = random.nextInt(0, orientacao == 'H' ? 10 - navio : 10);
 
                 posicionado = posicionarNavio(jogador.tabuleiro, navio, orientacao, linha, coluna);
             }
 
 
         }
-
+        System.out.println("Tabuleiro de "+jogador.getNome()+" preenchido com sucesso!");
 
     }
 
