@@ -42,6 +42,39 @@ public class Tabuleiro {
      * Quatro navios ocupando 1 espaço
      * */
 
+    public static boolean posicionarNavio(char[][] tabuleiro, Integer navio, char orientacao, int linha, int coluna) {
+        for (int i = 0; i < navio; i++) {
+            if (orientacao == 'H') {
+                if (tabuleiro[linha][coluna + i] == '.') {
+                    tabuleiro[linha][coluna + i] = navio.toString().charAt(0);
+                } else {
+                    for (int j = navio; j > 0; j--) {
+                        if (tabuleiro[linha][coluna + j] != '.' && tabuleiro[linha][coluna + j] != navio.toString().charAt(0)){
+                            //ainda não tá perfeito, mas já tá melhor
+                            continue;
+                        }
+                        tabuleiro[linha][coluna + j] = '.';
+                    }
+                    return false;
+                }
+            } else {
+                if (tabuleiro[linha + i][coluna] == '.') {
+                    tabuleiro[linha + i][coluna] = navio.toString().charAt(0);
+                } else {
+                    for (int j = navio; j > 0; j--) {
+                        if (tabuleiro[linha + j][coluna] != '.' && tabuleiro[linha + j][coluna] != navio.toString().charAt(0)) {
+                            //ainda não tá perfeito, mas já tá melhor
+                            continue;
+                        }
+                        tabuleiro[linha + j][coluna] = '.';
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static void preencherTabuleiroManual(char[][] tabuleiro) {
         Scanner read = new Scanner(System.in);
         int[] navios = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
@@ -81,20 +114,12 @@ public class Tabuleiro {
                 }
             }
 
-            int coluna = converteColuna(colunaChar);
-            for (int i = 0; i < navio; i++) {
-                if (orientacao == 'H') {
-                    if (tabuleiro[linha][coluna + i] == '.') {
-                        tabuleiro[linha][coluna + i] = navio.toString().charAt(0);
-                    } else {
-                        return;// não pode ser return pq vai pro jogador 2...
-                    }
-                } else {
-                    if (tabuleiro[linha + i][coluna] == '.') {
-                        tabuleiro[linha + i][coluna] = navio.toString().charAt(0);
-                    } else {
-                        return;// não pode ser return pq vai pro jogador 2...
-                    }
+                int coluna = converteColuna(colunaChar);
+
+                posicionado = posicionarNavio(tabuleiro, navio, orientacao, linha, coluna);
+                if (!posicionado) {
+                    System.out.println("Posição inválida, tente novamente.");
+//                    imprimirTabuleiro(tabuleiro); //apenas pra auxiliar no debug
                 }
             }
 
@@ -113,22 +138,7 @@ public class Tabuleiro {
             int linha = random.nextInt(0, orientacao == 'H' ? 10 : 10 - navio);
             int coluna = random.nextInt(0, orientacao == 'H' ? 10 - navio : 10);
 
-            for (int i = 0; i < navio; i++) {
-                if (orientacao == 'H') {//navio na horizontal
-
-                    if (tabuleiro[linha][coluna + i] == '.') {
-                        tabuleiro[linha][coluna + i] = navio.toString().charAt(0);
-                    } else {
-                        throw new RuntimeException("posição já preenchida");
-                    }
-                } else {//navio na vertical
-
-                    if (tabuleiro[linha + i][coluna] == '.') {
-                        tabuleiro[linha + i][coluna] = navio.toString().charAt(0);
-                    } else {
-                        throw new RuntimeException("posição já preenchida");
-                    }
-                }
+                posicionado = posicionarNavio(jogador.tabuleiro, navio, orientacao, linha, coluna);
             }
 
 
