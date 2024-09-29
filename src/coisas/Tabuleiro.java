@@ -16,14 +16,14 @@ public class Tabuleiro {
     }
 
     public static void imprimeCoordenadaLetras() {
-        System.out.print("  ");
+        System.out.print("\n  ");
         for (char letra : coordenadaLetras) {
             System.out.print(" " + letra + " ");
         }
         System.out.println();
     }
 
-    public static void imprimirTabuleiro(char[][] tabuleiro) {
+    public static void imprimirTabuleiroPreencher(char[][] tabuleiro) {
         imprimeCoordenadaLetras();
         for (int l = 0; l < tabuleiro.length; l++) {
             System.out.print((l) + " ");
@@ -34,6 +34,24 @@ public class Tabuleiro {
         }
     }
 
+    public static void imprimirTabuleiroJogar(char[][] tabuleiro) {
+        imprimeCoordenadaLetras();
+        for (int l = 0; l < tabuleiro.length; l++) {
+            System.out.print((l) + " ");
+            for (int c = 0; c < tabuleiro[l].length; c++) {
+                if (tabuleiro[l][c] == 'X') {
+                    System.out.print(" X ");
+                } else if (tabuleiro[l][c] == '*') {
+                    System.out.print(" * ");
+                } else {
+                    System.out.print(" . ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+
     public static boolean posicionarNavio(char[][] tabuleiro, Integer navio, char orientacao, int linha, int coluna) {
         for (int i = 0; i < navio; i++) {
             if (orientacao == 'H') {
@@ -41,7 +59,7 @@ public class Tabuleiro {
                     tabuleiro[linha][coluna + i] = navio.toString().charAt(0);
                 } else {
                     for (int j = navio; j > 0; j--) {
-                        if (tabuleiro[linha][coluna + j] != '.' && tabuleiro[linha][coluna + j] != navio.toString().charAt(0)){
+                        if (tabuleiro[linha][coluna + j] != '.' && tabuleiro[linha][coluna + j] != navio.toString().charAt(0)) {
                             //ainda não tá perfeito, mas já tá melhor
                             continue;
                         }
@@ -67,11 +85,11 @@ public class Tabuleiro {
         return true;
     }
 
-    public static void preencherTabuleiroManual(char[][] tabuleiro) {
+    public static void preencherTabuleiroManual(Jogador jogador) {
         Scanner read = new Scanner(System.in);
         int[] navios = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
 
-        imprimirTabuleiro(tabuleiro);
+        imprimirTabuleiroPreencher(jogador.tabuleiroPreencher);
 
         for (Integer navio : navios) {
             boolean posicionado = false;
@@ -109,14 +127,21 @@ public class Tabuleiro {
 
                 int coluna = converteColuna(colunaChar);
 
-                posicionado = posicionarNavio(tabuleiro, navio, orientacao, linha, coluna);
+                posicionado = posicionarNavio(jogador.tabuleiroPreencher, navio, orientacao, linha, coluna);
                 if (!posicionado) {
                     System.out.println("Posição inválida, tente novamente.");
 
                 }
             }
-            imprimirTabuleiro(tabuleiro);
+            jogador.tabuleiroJogar = copiarTabuleiro(jogador.tabuleiroPreencher);
+            imprimirTabuleiroPreencher(jogador.tabuleiroPreencher);
         }
+
+        System.out.print("Pressione qualquer tecla, depois 'ENTER' para continuar... ");
+        new Scanner(System.in).next();
+        System.out.println();
+        for (int i = 0; i < 50; ++i) System.out.println (); //gambiarra pra esconder tabuleiro antes da próxima jogada
+        System.out.println("Tabuleiro de " + jogador.getNome() + " preenchido com sucesso!");
     }
 
     public static void preencherTabuleiroAutomatico(Jogador jogador) {
@@ -132,21 +157,31 @@ public class Tabuleiro {
                 int linha = random.nextInt(0, orientacao == 'H' ? 10 : 10 - navio);
                 int coluna = random.nextInt(0, orientacao == 'H' ? 10 - navio : 10);
 
-                posicionado = posicionarNavio(jogador.tabuleiro, navio, orientacao, linha, coluna);
+                posicionado = posicionarNavio(jogador.tabuleiroPreencher, navio, orientacao, linha, coluna);
             }
 
-
         }
-        System.out.println("Tabuleiro de "+jogador.getNome()+" preenchido com sucesso!");
+        jogador.tabuleiroJogar = copiarTabuleiro(jogador.tabuleiroPreencher);
+        System.out.println("Tabuleiro de " + jogador.getNome() + " preenchido com sucesso!");
 
     }
 
-    private static int converteColuna(char colunaChar) {
+    public static int converteColuna(char colunaChar) {
         for (int i = 0; i < coordenadaLetras.length; i++) {
             if (colunaChar == coordenadaLetras[i]) {
                 return i;
             }
         }
         throw new RuntimeException("coluna inválida");
+    }
+
+    private static char[][] copiarTabuleiro(char[][] tabuleiroPreencher) {
+        char[][] tabuleiro = new char[tabuleiroPreencher.length][tabuleiroPreencher[0].length];
+        for (int l = 0; l < tabuleiro.length; l++) {
+            for (int c = 0; c < tabuleiro[l].length; c++) {
+                tabuleiro[l][c] = tabuleiroPreencher[l][c];
+            }
+        }
+        return tabuleiro;
     }
 }
