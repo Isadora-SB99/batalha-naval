@@ -34,14 +34,6 @@ public class Tabuleiro {
         }
     }
 
-
-    /*
-     * Um navio ocupando 4 espaços
-     * Dois navios ocupando 3 espaços
-     * Três navios ocupando 2 espaços
-     * Quatro navios ocupando 1 espaço
-     * */
-
     public static boolean posicionarNavio(char[][] tabuleiro, Integer navio, char orientacao, int linha, int coluna) {
         for (int i = 0; i < navio; i++) {
             if (orientacao == 'H') {
@@ -78,9 +70,7 @@ public class Tabuleiro {
     public static void preencherTabuleiroManual(char[][] tabuleiro) {
         Scanner read = new Scanner(System.in);
         int[] navios = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
-//        char orientacao = '.';
-//        int linha = -1;
-//        char coluna = '0';
+
         imprimirTabuleiro(tabuleiro);
 
         for (Integer navio : navios) {
@@ -119,10 +109,9 @@ public class Tabuleiro {
                 posicionado = posicionarNavio(tabuleiro, navio, orientacao, linha, coluna);
                 if (!posicionado) {
                     System.out.println("Posição inválida, tente novamente.");
-//                    imprimirTabuleiro(tabuleiro); //apenas pra auxiliar no debug
+
                 }
             }
-
             imprimirTabuleiro(tabuleiro);
         }
     }
@@ -132,7 +121,6 @@ public class Tabuleiro {
 
         int[] navios = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
 
-        //aqui precisa ter os navios definidos pra colocar
         for (Integer navio : navios) {
             char orientacao = random.nextBoolean() ? 'H' : 'V';
             int linha = random.nextInt(0, orientacao == 'H' ? 10 : 10 - navio);
