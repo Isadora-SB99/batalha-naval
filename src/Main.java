@@ -64,7 +64,7 @@ public class Main {
                     preencherTabuleiroManual(jogador.tabuleiro);
                     break;
                 case 'A':
-                    preencherTabuleiroAutomatico(jogador.tabuleiro);
+                    preencherTabuleiroAutomatico(jogador);
                     break;
                 default:
                     System.out.println("Opção inválida");
@@ -89,7 +89,7 @@ public class Main {
         inicializarTabuleiros();
 
         if (modoJogo == 'C'){
-            preencherTabuleiroAutomatico(jogador2.tabuleiro);
+            preencherTabuleiroAutomatico(jogador2);
             //aqui pergunta se jogador 1 quer preencher automatico ou manual
             definirModoPreenchimento(jogador1, read);
         }else{
