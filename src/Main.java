@@ -54,7 +54,7 @@ public class Main {
         return modoJogo;
     }
 
-    public static char definirModoPreenchimento(Jogador jogador, Scanner read){
+    public static void definirModoPreenchimento(Jogador jogador, Scanner read){
         char modoPreenchimento = '.';
         while (modoPreenchimento != 'M' && modoPreenchimento != 'A') {
             System.out.print(jogador.getNome()+", você deseja preencher o tabuleiro manualmente ou automaticamente (M - manual / A - automático): ");
@@ -71,7 +71,6 @@ public class Main {
                     System.out.println("Opção inválida");
             }
         }
-        return modoPreenchimento;
     }
 
     public static void inicializarTabuleiros(){
