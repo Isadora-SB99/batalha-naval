@@ -50,6 +50,26 @@ public class Main {
         return modoJogo;
     }
 
+    public static char definirModoPreenchimento(Jogador jogador, Scanner read){
+        char modoPreenchimento = '.';
+        while (modoPreenchimento != 'M' && modoPreenchimento != 'A') {
+            System.out.print(jogador.getNome()+", você deseja preencher o tabuleiro manualmente ou automaticamente (M - manual / A - automático): ");
+            modoPreenchimento = read.next().toUpperCase().charAt(0);
+
+            switch (modoPreenchimento) {
+                case 'M':
+                    preencherTabuleiroManual(jogador.tabuleiro);
+                    break;
+                case 'A':
+                    preencherTabuleiroAutomatico(jogador.tabuleiro);
+                    break;
+                default:
+                    System.out.println("Opção inválida");
+            }
+        }
+        return modoPreenchimento;
+    }
+
     public static void inicializarTabuleiros(){
         inicializarTabuleiro(jogador1.tabuleiro);
         inicializarTabuleiro(jogador2.tabuleiro);
@@ -68,8 +88,11 @@ public class Main {
         if (modoJogo == 'C'){
             preencherTabuleiroAutomatico(jogador2.tabuleiro);
             //aqui pergunta se jogador 1 quer preencher automatico ou manual
+            definirModoPreenchimento(jogador1, read);
         }else{
             //pergunta pros dois jogadores se querem preencher automatico ou manual
+            definirModoPreenchimento(jogador1, read);
+            definirModoPreenchimento(jogador2, read);
         }
 
 
