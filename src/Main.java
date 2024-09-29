@@ -21,7 +21,10 @@ public class Main {
         System.out.println("Também é possível escolher se deseja inserir os barcos de forma manual ou de forma automática.");
         System.out.println("Tiros na água imprimem '*', tiros em navios imprimem o número da quantidade de posições do navio.");
         System.out.println("Vence quem afundar todos os navios do adversário primeiro.");
-        System.out.println("Bom jogo e boa sorte!\n\n");
+        System.out.println("Bom jogo e boa sorte!");
+        System.out.print("Pressione qualquer tecla, depois 'ENTER' para continuar... ");
+        new Scanner(System.in).next().charAt(0);
+        System.out.println();
     }
 
     public static void lerNomeJogador(Jogador jogador, int num){
